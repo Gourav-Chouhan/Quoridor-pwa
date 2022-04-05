@@ -1,0 +1,191 @@
+const express = require("express");
+const path = require("path");
+const app = express();
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+app.use(express.json());
+const port = process.env.PORT;
+
+// const User = require("./model/user");
+
+// mongoose.connect("mongodb://localhost:27017/login-app-db", {
+//   useNewUrlPasrer: true,
+//   useUnifiedTopology: true,
+// });
+
+let connected = [];
+let queue = [];
+let matches = [];
+
+class Person {
+  constructor(socketId) {
+    this.socketId = socketId;
+    this.authinticated = false;
+    this.email = null;
+    this.name = null;
+    this.status = "idle";
+  }
+}
+
+class Match {
+  constructor(p1, p2) {
+    this.p1 = p1;
+    this.p2 = p2;
+    this.match_id = this.p1.socketId + this.p2.socketId;
+    if (Math.random() > 0.5) {
+      this.p1.turn = true;
+      this.p2.turn = false;
+    } else {
+      this.p1.turn = false;
+      this.p2.turn = true;
+    }
+  }
+}
+
+app.get("/", function (req, res) {
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get("/game", middleware, (req, res) => {
+  verify(req.token)
+    .then((data) => {
+      app.use("/", express.static(path.join(__dirname, "public")));
+      res.sendFile(__dirname + "/public/game/index.html");
+    })
+    .catch((err) => {
+      if (err) {
+        res.sendStatus(403);
+      }
+    });
+});
+
+function middleware(req, res, next) {
+  const bearerHeader = req.headers["authorization"];
+  if (typeof bearerHeader !== "undefined") {
+    token = bearerHeader.split(" ")[1];
+    req.token = token;
+    next();
+  } else {
+    res.sendStatus(403);
+  }
+}
+
+io.on("connection", (socket) => {
+  let person = new Person(socket.id);
+  connected.push(person);
+
+  socket.emit("welcome", person);
+
+  socket.on("setInfo", (req) => {
+    for (let i = 0; i < connected.length; i++) {
+      if (connected[i].socketId == req.socketId) {
+        connected[i].authinticated = true;
+        connected[i].email = req.email;
+        connected[i].name = req.name;
+        connected[i].imageUrl = req.imageUrl;
+      }
+    }
+  });
+  socket.on("test", (data) => {});
+
+  socket.on("toSearchingMode", (socketId) => {
+    for (let i = 0; i < connected.length; i++) {
+      if (connected[i].socketId == socketId) {
+        connected[i].status = "searching";
+        queue.push(connected[i]);
+        findMatch();
+      }
+    }
+  });
+
+  socket.on("toIdleMode", (socketId) => {
+    for (let i = 0; i < connected.length; i++) {
+      if (connected[i].socketId == socketId) {
+        connected[i].status = "idle";
+        // queue.push(connected[i]);
+        // findMatch();
+      }
+    }
+  });
+
+  socket.on("matchMoves", (data) => {
+    io.to(data.to).emit("matchMoves", data);
+  });
+
+  socket.on("disconnect", () => {
+    for (let i = 0; i < connected.length; i++) {
+      if (connected[i].socketId == socket.id) {
+        connected.splice(i, 1);
+      }
+    }
+
+    for (let m of matches) {
+      if (m.p1.socketId == socket.id) {
+        matches.splice(matches.indexOf(m), 1);
+        io.to(m.p2.socketId).emit("matchMoves", {
+          type: "disconnect",
+          name: m.p1.name,
+          msg: "Your opponent has disconnected.",
+        });
+      }
+      if (m.p2.socketId == socket.id) {
+        matches.splice(matches.indexOf(m), 1);
+        io.to(m.p1.socketId).emit("matchMoves", {
+          type: "disconnect",
+          name: m.p2.name,
+          msg: "Your opponent has disconnected.",
+        });
+      }
+    }
+  });
+});
+
+server.listen(port, () => {
+  console.log("listening on *: " + port);
+});
+
+function findMatch() {
+  if (queue.length >= 2) {
+    let person1 = queue.shift();
+    let person2 = queue.shift();
+    let match = new Match(person1, person2);
+    let match2 = new Match(person2, person1);
+    io.to(person1.socketId).emit("matched", match);
+    io.to(person2.socketId).emit("matched", match2);
+    for (let i = 0; i < connected.length; i++) {
+      if (connected[i].socketId == person1.socketId) {
+        connected[i].status = "playing";
+        connected[i].matched = person2;
+      }
+      if (connected[i].socketId == person2.socketId) {
+        connected[i].status = "playing";
+        connected[i].matched = person1;
+      }
+    }
+    matches.push(new Match(person1, person2));
+  }
+}
+
+// google verification for web app
+
+const { OAuth2Client } = require("google-auth-library");
+const { default: mongoose } = require("mongoose");
+const client = new OAuth2Client(
+  "1023157306896-gf853hu70rsca3vktm2hdpjldcfucoep.apps.googleusercontent.com"
+);
+async function verify(token) {
+  const ticket = await client.verifyIdToken({
+    idToken: token,
+    audience:
+      "1023157306896-gf853hu70rsca3vktm2hdpjldcfucoep.apps.googleusercontent.com", // Specify the CLIENT_ID of the app that accesses the backend
+  });
+  const payload = ticket.getPayload();
+  const userid = payload["sub"];
+}
+
+// setInterval(() => {
+//   console.log(queue);
+//   console.log("________________________________");
+// }, 1000);

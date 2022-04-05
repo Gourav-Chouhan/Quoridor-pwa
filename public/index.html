@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="google-signin-client_id"
+      content="1023157306896-gf853hu70rsca3vktm2hdpjldcfucoep.apps.googleusercontent.com"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        font-family: "Luckiest Guy", cursive;
+      }
+
+      html,
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eeeed2;
+      }
+      .card {
+        width: clamp(300px, 50vw, 500px);
+        margin-bottom: 20px;
+        box-shadow: 0 14px 16px 0 rgba(0, 0, 0, 0.329);
+        border-radius: 8px;
+        background-color: #769656;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        height: 60%;
+      }
+    </style>
+
+    <title>Quoridor Login Page</title>
+  </head>
+  <body>
+    <div class="card login-page" id="login-page">
+      <div>
+        <h2>Welcome to</h2>
+        <h1>Quoridor</h1>
+      </div>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </div>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+      let userProfile = {};
+      function onSignIn(googleUser) {
+        userProfile.id_token = googleUser.getAuthResponse().id_token;
+        userProfile.name = googleUser.getBasicProfile().getName();
+        userProfile.email = googleUser.getBasicProfile().getEmail();
+        userProfile.imageUrl = googleUser.getBasicProfile().getImageUrl();
+        urs = googleUser;
+        var profile = googleUser.getBasicProfile();
+        console.log("authenticated");
+        fetch("/game", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + userProfile.id_token,
+          },
+        }).then((d) => {
+          if (d.status == 200) {
+            console.log("success");
+            d.body
+              .getReader()
+              .read()
+              .then((d) => {
+                localStorage.setItem(
+                  "userProfile",
+                  JSON.stringify(userProfile)
+                );
+                window.location.href = "./game/index.html";
+              });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
