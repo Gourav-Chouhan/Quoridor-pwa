@@ -8,12 +8,6 @@ const io = new Server(server);
 app.use(express.json());
 const port = process.env.PORT;
 
-// const User = require("./model/user");
-
-// mongoose.connect("mongodb://localhost:27017/login-app-db", {
-//   useNewUrlPasrer: true,
-//   useUnifiedTopology: true,
-// });
 
 let connected = [];
 let queue = [];
@@ -64,7 +58,7 @@ app.get("/game", middleware, (req, res) => {
 function middleware(req, res, next) {
   const bearerHeader = req.headers["authorization"];
   if (typeof bearerHeader !== "undefined") {
-    token = bearerHeader.split(" ")[1];
+    let token = bearerHeader.split(" ")[1];
     req.token = token;
     next();
   } else {
