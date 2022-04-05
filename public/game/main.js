@@ -7,8 +7,8 @@ let cvs;
 let g;
 
 function setup() {
-  let w= win.
-  cvs = createCanvas(380, 380);
+  let w= window.innerWidth - 40;
+  cvs = createCanvas(w,w);
   cvs.parent("canvas-container");
   noStroke();
   cvs.className = "cvs";
