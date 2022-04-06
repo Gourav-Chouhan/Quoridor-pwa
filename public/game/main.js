@@ -7,8 +7,7 @@ let cvs;
 let g;
 
 function setup() {
-  let w= window.innerWidth - 40;
-  cvs = createCanvas(w,w);
+  cvs = createCanvas(450, 450);
   cvs.parent("canvas-container");
   noStroke();
   cvs.className = "cvs";
@@ -104,20 +103,10 @@ function addBar(dx, dy, barMode, isVIP = false) {
     g.grid[dy][dx - 1].blocked = true;
     g.grid[dy][dx + 1].blocked = true;
     if (isVIP) {
-    } else if (isWhite) {
+    } else if (true) {
       if (
         !isLegal({ x: yourLoc.x, y: yourLoc.y }, 0) ||
         !isLegal({ x: opponentLoc.x, y: opponentLoc.y }, gridSize - 1)
-      ) {
-        // alert("illegal move");
-        g.grid[dy][dx - 1].blocked = false;
-        g.grid[dy][dx + 1].blocked = false;
-        return false;
-      }
-    } else {
-      if (
-        !isLegal({ x: yourLoc.x, y: yourLoc.y }, gridSize - 1) ||
-        !isLegal({ x: opponentLoc.x, y: opponentLoc.y }, 0)
       ) {
         // alert("illegal move");
         g.grid[dy][dx - 1].blocked = false;
@@ -137,11 +126,16 @@ function addBar(dx, dy, barMode, isVIP = false) {
     g.grid[dy - 1][dx].blocked = true;
     g.grid[dy + 1][dx].blocked = true;
     if (isVIP) {
-    } else if (!isLegal({ x: yourLoc.x, y: yourLoc.y }, 0)) {
-      // alert("illegal move");
-      g.grid[dy - 1][dx].blocked = false;
-      g.grid[dy + 1][dx].blocked = false;
-      return false;
+    } else if (true) {
+      if (
+        !isLegal({ x: yourLoc.x, y: yourLoc.y }, 0) ||
+        !isLegal({ x: opponentLoc.x, y: opponentLoc.y }, gridSize - 1)
+      ) {
+        // alert("illegal move");
+        g.grid[dy - 1][dx].blocked = false;
+        g.grid[dy + 1][dx].blocked = false;
+        return false;
+      }
     }
     dy + 2 < gridSize ? (g.grid[dy + 2][dx].vBlock = true) : null;
     dy - 2 > 0 ? (g.grid[dy - 2][dx].vBlock = true) : null;
@@ -231,14 +225,4 @@ function showPopUp(msg) {
 function backToHome() {
   //reload the page
   window.location.reload();
-  // document.getElementById("container").style.display = "none";
-  // document.getElementById("menu").style.display = "flex";
-  // document.getElementById("pop-up").style.display = "none";
-  // g = new Grid(gridSize);
-  // mode = "move";
-  // turn = false;
-  // document.getElementById("findRandom").textContent = "Find Random";
-  // playing = false;
-  // document.getElementById("canvas-container").style.transform = "rotate(0deg)";
-  // socket.emit("toIdleMode", socketId);
 }
