@@ -154,7 +154,7 @@ button {
   }
   
   67%{
-    transform: scale(0.8) rotate(-7deg);
+    transform: scale(1.3) rotate(-7deg);
     color: lightgreen;
   }
   

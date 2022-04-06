@@ -12,7 +12,7 @@ let matchFoundSound;
 let popupSound;
 let winSound;
 let looseSound;
-
+let errorSound;
 
 function preload() {
   soundFormats('mp3', 'ogg');
@@ -23,6 +23,7 @@ function preload() {
   popupSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_cartoon_pop_bubble_etc_001_80358.mp3?v=1649272391138')
   winSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/success-fanfare-trumpets-6185.mp3?v=1649274036645')
   looseSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/negative_beeps-6008.mp3?v=1649274107486')
+  errorSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_multimedia_alert_error_003_26394.mp3?v=1649276860292')
 }
 
 function setup() {
@@ -71,6 +72,8 @@ function draw() {
       document.getElementById("yourTurn").textContent = "Your Turn";
       document.getElementById("yourTurn").style.animation = "animate 400ms ease-in"
     } else {
+      document.getElementById("yourTurn").style.animation = ""
+      
       document.getElementById("yourTurn").textContent = "Opponent's Turn";
     }
     if (allSet && playing) {
@@ -138,6 +141,7 @@ function addBar(dx, dy, barMode, isVIP = false) {
         !isLegal({ x: blackPiece.x, y: blackPiece.y }, gridSize - 1)
       ) {
         // alert("illegal move");
+        errorSound.play();
         g.grid[dy][dx - 1].blocked = false;
         g.grid[dy][dx + 1].blocked = false;
         return false;
@@ -163,6 +167,8 @@ function addBar(dx, dy, barMode, isVIP = false) {
         !isLegal({ x: blackPiece.x, y: blackPiece.y }, gridSize - 1)
       ) {
         // alert("illegal move");
+        errorSound.play();
+        
         g.grid[dy - 1][dx].blocked = false;
         g.grid[dy + 1][dx].blocked = false;
         return false;
