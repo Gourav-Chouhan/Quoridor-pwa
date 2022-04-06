@@ -26,6 +26,8 @@ function preload() {
   errorSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_multimedia_alert_error_003_26394.mp3?v=1649276860292')
 }
 
+let yourTurnMessage = 'Your Turn'
+
 function setup() {
   let cvsWidth = min(window.innerWidth - 50, 500)
   cvs = createCanvas(cvsWidth, cvsWidth);
@@ -69,7 +71,7 @@ function draw() {
       }
     }
     if (turn) {
-      document.getElementById("yourTurn").textContent = "Your Turn";
+      document.getElementById("yourTurn").textContent = yourTurnMessage;
       document.getElementById("yourTurn").style.animation = "animate 400ms ease-in"
     } else {
       document.getElementById("yourTurn").style.animation = ""
@@ -142,6 +144,13 @@ function addBar(dx, dy, barMode, isVIP = false) {
       ) {
         // alert("illegal move");
         errorSound.play();
+        yourTurnMessage = 'Illegal Move!!!'
+        document.getElementById("yourTurn").style.color = 'red';
+        setTimeout(()=> {
+          yourTurnMessage = 'Your Turn';
+        document.getElementById("yourTurn").style.color = 'white';
+          
+        }, 600)
         g.grid[dy][dx - 1].blocked = false;
         g.grid[dy][dx + 1].blocked = false;
         return false;
@@ -168,7 +177,13 @@ function addBar(dx, dy, barMode, isVIP = false) {
       ) {
         // alert("illegal move");
         errorSound.play();
-        
+        yourTurnMessage = 'Illegal Move!!!'
+        document.getElementById("yourTurn").style.color = 'red';
+        setTimeout(()=> {
+          yourTurnMessage = 'Your Turn';
+        document.getElementById("yourTurn").style.color = 'white';
+          
+        }, 600)
         g.grid[dy - 1][dx].blocked = false;
         g.grid[dy + 1][dx].blocked = false;
         return false;

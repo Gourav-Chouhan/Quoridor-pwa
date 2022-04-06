@@ -20,7 +20,7 @@ let searchingAnimation;
 document.getElementById("findRandom").addEventListener("click", (e) => {
   clickSound.play();
   socket.emit("toSearchingMode", socketId);
-    // document.body.requestFullscreen();
+    document.body.requestFullscreen();
   e.target.textContent = "Seacrhing...";
   e.target.disabled = "true";
   searching = true;

@@ -156,7 +156,7 @@ class Grid {
     }
     for (let bd of this.blockedDots) {
       // blocked dots
-      strokeWeight(4);
+      strokeWeight(2);
       if (bd.filled == "hbar") {
         fill(barrierColor);
         stroke(groveColor);
