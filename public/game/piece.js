@@ -343,11 +343,13 @@ function checkWinYou() {
   let res = false;
   if (isWhite) {
     if (yourLoc.y == 0) {
+      winSound.play();
       showPopUp("You Won")
       res = true;
     }
   } else {
     if (yourLoc.y == gridSize - 1) {
+      winSound.play();
       showPopUp("You Won");
       res = true;
     }

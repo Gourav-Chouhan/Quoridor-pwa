@@ -10,15 +10,19 @@ let putBarSound;
 let clickSound;
 let matchFoundSound;
 let popupSound;
+let winSound;
+let looseSound;
 
 
 function preload() {
   soundFormats('mp3', 'ogg');
   moveSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_toy_board_game_token_plastic_move_on_board_x1.mp3?v=1649270788093');
-  putBarSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/household_glass_jar_move_in_fridge_door.mp3?v=1649271518185');
+  putBarSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/household_audio_cassette_tape_case_put_down_on_table.mp3?v=1649273778126');
   clickSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_technology_studio_speaker_active_power_switch_click_003_68875.mp3?v=1649271639458')
   matchFoundSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/Match%20Found%20Valorant.mp3?v=1649271908325')
   popupSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_cartoon_pop_bubble_etc_001_80358.mp3?v=1649272391138')
+  winSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/success-fanfare-trumpets-6185.mp3?v=1649274036645')
+  looseSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/negative_beeps-6008.mp3?v=1649274107486')
 }
 
 function setup() {
