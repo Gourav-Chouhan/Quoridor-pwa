@@ -69,6 +69,7 @@ function draw() {
     }
     if (turn) {
       document.getElementById("yourTurn").textContent = "Your Turn";
+      document.getElementById("yourTurn").style.animation = "animate 400ms ease-in"
     } else {
       document.getElementById("yourTurn").textContent = "Opponent's Turn";
     }
