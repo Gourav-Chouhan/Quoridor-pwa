@@ -5,6 +5,13 @@ function isBox(a, b) {
 }
 let cvs;
 let g;
+let moveSound;
+
+
+function preload() {
+  soundFormats('mp3', 'ogg');
+  moveSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_toy_board_game_token_plastic_move_on_board_x1.mp3?v=1649270788093');
+}
 
 function setup() {
   cvs = createCanvas(350, 350);
