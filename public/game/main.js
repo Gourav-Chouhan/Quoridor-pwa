@@ -7,7 +7,7 @@ let cvs;
 let g;
 
 function setup() {
-  cvs = createCanvas(450, 450);
+  cvs = createCanvas(350, 350);
   cvs.parent("canvas-container");
   noStroke();
   cvs.className = "cvs";
@@ -104,9 +104,12 @@ function addBar(dx, dy, barMode, isVIP = false) {
     g.grid[dy][dx + 1].blocked = true;
     if (isVIP) {
     } else if (true) {
+      let whitePiece = yourLoc.color == "white" ? yourLoc : opponentLoc;
+      let blackPiece = yourLoc.color == "black" ? yourLoc : opponentLoc;
+
       if (
-        !isLegal({ x: yourLoc.x, y: yourLoc.y }, 0) ||
-        !isLegal({ x: opponentLoc.x, y: opponentLoc.y }, gridSize - 1)
+        !isLegal({ x: whitePiece.x, y: whitePiece.y }, 0) ||
+        !isLegal({ x: blackPiece.x, y: blackPiece.y }, gridSize - 1)
       ) {
         // alert("illegal move");
         g.grid[dy][dx - 1].blocked = false;
@@ -127,9 +130,11 @@ function addBar(dx, dy, barMode, isVIP = false) {
     g.grid[dy + 1][dx].blocked = true;
     if (isVIP) {
     } else if (true) {
+      let whitePiece = yourLoc.color == "white" ? yourLoc : opponentLoc;
+      let blackPiece = yourLoc.color == "black" ? yourLoc : opponentLoc;
       if (
-        !isLegal({ x: yourLoc.x, y: yourLoc.y }, 0) ||
-        !isLegal({ x: opponentLoc.x, y: opponentLoc.y }, gridSize - 1)
+        !isLegal({ x: whitePiece.x, y: whitePiece.y }, 0) ||
+        !isLegal({ x: blackPiece.x, y: blackPiece.y }, gridSize - 1)
       ) {
         // alert("illegal move");
         g.grid[dy - 1][dx].blocked = false;
