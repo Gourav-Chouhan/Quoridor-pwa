@@ -9,6 +9,7 @@ let moveSound;
 let putBarSound;
 let clickSound;
 let matchFoundSound;
+let popupSound;
 
 
 function preload() {
@@ -17,6 +18,7 @@ function preload() {
   putBarSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/household_glass_jar_move_in_fridge_door.mp3?v=1649271518185');
   clickSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_technology_studio_speaker_active_power_switch_click_003_68875.mp3?v=1649271639458')
   matchFoundSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/Match%20Found%20Valorant.mp3?v=1649271908325')
+  popupSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_cartoon_pop_bubble_etc_001_80358.mp3?v=1649272391138')
 }
 
 function setup() {
@@ -89,6 +91,7 @@ function whoami(i, j) {
 }
 
 function toHbarMode() {
+  clickSound.play()
   currentMode.style.backgroundColor = "#ff8cb8";
   currentMode = document.getElementById("hbar");
   currentMode.style.backgroundColor = "#00ff00";
@@ -96,6 +99,8 @@ function toHbarMode() {
 }
 
 function toVbarMode() {
+  clickSound.play()
+  
   currentMode.style.backgroundColor = "#ff8cb8";
   currentMode = document.getElementById("vbar");
   currentMode.style.backgroundColor = "#00ff00";
@@ -104,6 +109,8 @@ function toVbarMode() {
 }
 
 function toMoveMode() {
+  clickSound.play()
+  
   currentMode.style.backgroundColor = "#ff8cb8";
   currentMode = document.getElementById("move");
   currentMode.style.backgroundColor = "#00ff00";
@@ -171,6 +178,7 @@ socket.on("matchMoves", (data) => {
     putBarSound.play()
     addBar(data.dx, data.dy, data.mode, true);
   } else if (data.type == "move") {
+    moveSound.play();
     opponentLoc = {
       x: data.newLocation.x,
       y: data.newLocation.y,
@@ -239,6 +247,7 @@ document.getElementById("canvas-container").addEventListener("click", (e) => {
 });
 
 function showPopUp(msg) {
+  popupSound.play();
   document.getElementById("pop-up").style.display = "flex";
   document.getElementById("pop-up-message").textContent = msg;
 }

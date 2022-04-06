@@ -343,7 +343,7 @@ function checkWinYou() {
   let res = false;
   if (isWhite) {
     if (yourLoc.y == 0) {
-      console.log("You win");
+      showPopUp("You Won")
       res = true;
     }
   } else {
