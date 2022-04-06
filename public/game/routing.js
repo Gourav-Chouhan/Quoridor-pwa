@@ -54,10 +54,31 @@ socket.on("matched", (data) => {
   playing = true;
   clearInterval(searchingAnimation);
   document.getElementById("findRandom").textContent = "Match Found";
+  document.getElementById("match-found-pop-up").display = "flex";
+
+    setTimeout(() => {
+  document.getElementById("startingTimer").textContent = "3";
+  }, 0);
+  
   setTimeout(() => {
+  document.getElementById("startingTimer").textContent = "2";
+  }, 1000);
+  
+  setTimeout(() => {
+  document.getElementById("startingTimer").textContent = "1";
+  }, 2000);
+  
+  
+  
+  setTimeout(() => {
+  document.getElementById("startingTimer").textContent = "0";
+    
+  document.getElementById("match-found-pop-up").display = "none";
+    
     document.getElementById("menu").style.display = "none";
     document.getElementById("container").style.display = "flex";
-  }, 300);
+    
+  }, 3000);
   match = data;
 
   let myNode = document.getElementById("forOpponent");
@@ -98,7 +119,7 @@ socket.on("matched", (data) => {
     document.getElementById("forYou").appendChild(imgdiv1);
     document.getElementById("forYou").appendChild(yourCircle);
     document.getElementById("forYou").appendChild(namediv1);
-    alert(`you have been matched to ${data.p2.name} and its your turn`);
+    // alert(`you have been matched to ${data.p2.name} and its your turn`);
   } else {
     document.getElementById("canvas-container").style.transform =
       "rotate(180deg)";
@@ -114,7 +135,7 @@ socket.on("matched", (data) => {
     document.getElementById("forYou").appendChild(imgdiv1);
     document.getElementById("forYou").appendChild(yourCircle);
     document.getElementById("forYou").appendChild(namediv1);
-    alert(`You have been matched to ${data.p2.name} and its opponent turn`);
+    // alert(`You have been matched to ${data.p2.name} and its opponent turn`);
   }
 
   setTimeout(() => {
