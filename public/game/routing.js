@@ -19,7 +19,9 @@ let searchingAnimation;
 
 document.getElementById("findRandom").addEventListener("click", (e) => {
   socket.emit("toSearchingMode", socketId);
+    document.body.requestFullscreen();
   e.target.textContent = "Seacrhing...";
+  e.target.disabled = "true";
   searching = true;
   searchingAnimation = setInterval(() => {
     let elm = document.getElementById("findRandom");
