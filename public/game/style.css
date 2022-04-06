@@ -134,6 +134,8 @@ button {
 
 #yourTurn {
   color: white;
+  margin: 30px;
+    font-size: 24px;
 }
 
 .card {

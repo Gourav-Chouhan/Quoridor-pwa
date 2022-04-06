@@ -201,15 +201,15 @@ class Grid {
             if (y-1 > 0 && !this.grid[y - 1][x - 2].blocked) {
               this.legalPlaces.push(this.grid[y - 2][x - 2]);
             }
-            if (y+1 < !this.grid[y + 1][x - 2].blocked) {
+            if (y+1 < this.size && !this.grid[y + 1][x - 2].blocked) {
               this.legalPlaces.push(this.grid[y + 2][x - 2]);
             }
           }
         } else {
-          if (!this.grid[y - 1][x - 2].blocked) {
+          if (y-1 > 0 && !this.grid[y - 1][x - 2].blocked) {
             this.legalPlaces.push(this.grid[y - 2][x - 2]);
           }
-          if (!this.grid[y + 1][x - 2].blocked) {
+          if (y+1 < this.size && !this.grid[y + 1][x - 2].blocked) {
             this.legalPlaces.push(this.grid[y + 2][x - 2]);
           }
         }
@@ -224,18 +224,18 @@ class Grid {
           if (!this.grid[y - 3][x].blocked) {
             this.legalPlaces.push(this.grid[y - 4][x]);
           } else {
-            if (!this.grid[y - 2][x - 1].blocked) {
+            if (x-1 > 0 && !this.grid[y - 2][x - 1].blocked) {
               this.legalPlaces.push(this.grid[y - 2][x - 2]);
             }
-            if (!this.grid[y - 2][x + 1].blocked) {
+            if (x + 1 < this.size && !this.grid[y - 2][x + 1].blocked) {
               this.legalPlaces.push(this.grid[y - 2][x + 2]);
             }
           }
         } else {
-          if (!this.grid[y - 2][x - 1].blocked) {
+          if (x-1 > 0 && !this.grid[y - 2][x - 1].blocked) {
             this.legalPlaces.push(this.grid[y - 2][x - 2]);
           }
-          if (!this.grid[y - 2][x + 1].blocked) {
+          if (x+1 < this.size && !this.grid[y - 2][x + 1].blocked) {
             this.legalPlaces.push(this.grid[y - 2][x + 2]);
           }
         }
@@ -250,18 +250,18 @@ class Grid {
           if (!this.grid[y][x + 3].blocked) {
             this.legalPlaces.push(this.grid[y][x + 4]);
           } else {
-            if (!this.grid[y - 1][x + 2].blocked) {
+            if (y-1 > 0 && !this.grid[y - 1][x + 2].blocked) {
               this.legalPlaces.push(this.grid[y - 2][x + 2]);
             }
-            if (!this.grid[y + 1][x + 2].blocked) {
+            if (y + 1 < this.size && !this.grid[y + 1][x + 2].blocked) {
               this.legalPlaces.push(this.grid[y + 2][x + 2]);
             }
           }
         } else {
-          if (!this.grid[y - 1][x + 2].blocked) {
+          if (y-1 > 0 && !this.grid[y - 1][x + 2].blocked) {
             this.legalPlaces.push(this.grid[y - 2][x + 2]);
           }
-          if (!this.grid[y + 1][x + 2].blocked) {
+          if (y+1 < this.size && !this.grid[y + 1][x + 2].blocked) {
             this.legalPlaces.push(this.grid[y + 2][x + 2]);
           }
         }
@@ -276,18 +276,18 @@ class Grid {
           if (!this.grid[y + 3][x].blocked) {
             this.legalPlaces.push(this.grid[y + 4][x]);
           } else {
-            if (!this.grid[y + 2][x - 1].blocked) {
+            if (x-1 > 0 && !this.grid[y + 2][x - 1].blocked) {
               this.legalPlaces.push(this.grid[y + 2][x - 2]);
             }
-            if (!this.grid[y + 2][x + 1].blocked) {
+            if (x+1 < this.size && !this.grid[y + 2][x + 1].blocked) {
               this.legalPlaces.push(this.grid[y + 2][x + 2]);
             }
           }
         } else {
-          if (!this.grid[y + 2][x - 1].blocked) {
+          if (x-1 > 0 && !this.grid[y + 2][x - 1].blocked) {
             this.legalPlaces.push(this.grid[y + 2][x - 2]);
           }
-          if (!this.grid[y + 2][x + 1].blocked) {
+          if (x+1 < this.size && !this.grid[y + 2][x + 1].blocked) {
             this.legalPlaces.push(this.grid[y + 2][x + 2]);
           }
         }
