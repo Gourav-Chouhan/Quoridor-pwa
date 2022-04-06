@@ -22,7 +22,8 @@ function preload() {
 }
 
 function setup() {
-  cvs = createCanvas(350, 350);
+  let cvsWidth = min(window.innerWidth - 50, 500)
+  cvs = createCanvas(cvsWidth, cvsWidth);
   cvs.parent("canvas-container");
   noStroke();
   cvs.className = "cvs";

@@ -166,12 +166,17 @@ button {
   background: #769656;
   border: 1px solid #eeeed2;
   box-shadow: 0 0 20px #eeeed2;
+  color: white;
   width: 20ch;
   height: 20ch;
   border-radius: 35px;
   padding: 10px;
   margin: 10px;
   z-index: 10;
+}
+
+#startingTimer{
+  font-size: 60px;
 }
 
 .pop-up p {

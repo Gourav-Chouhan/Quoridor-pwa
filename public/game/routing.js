@@ -56,7 +56,7 @@ socket.on("matched", (data) => {
   clearInterval(searchingAnimation);
   document.getElementById("findRandom").textContent = "Match Found";
   matchFoundSound.play()
-  document.getElementById("match-found-pop-up").display = "flex";
+  document.getElementById("match-found-pop-up").style.display = "flex";
 
     setTimeout(() => {
   document.getElementById("startingTimer").textContent = "3";
@@ -75,7 +75,7 @@ socket.on("matched", (data) => {
   setTimeout(() => {
   document.getElementById("startingTimer").textContent = "0";
     
-  document.getElementById("match-found-pop-up").display = "none";
+  document.getElementById("match-found-pop-up").style.display = "none";
     
     document.getElementById("menu").style.display = "none";
     document.getElementById("container").style.display = "flex";
