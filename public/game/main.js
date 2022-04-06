@@ -6,11 +6,17 @@ function isBox(a, b) {
 let cvs;
 let g;
 let moveSound;
+let putBarSound;
+let clickSound;
+let matchFoundSound;
 
 
 function preload() {
   soundFormats('mp3', 'ogg');
   moveSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_toy_board_game_token_plastic_move_on_board_x1.mp3?v=1649270788093');
+  putBarSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/household_glass_jar_move_in_fridge_door.mp3?v=1649271518185');
+  clickSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/zapsplat_technology_studio_speaker_active_power_switch_click_003_68875.mp3?v=1649271639458')
+  matchFoundSound = loadSound('https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/Match%20Found%20Valorant.mp3?v=1649271908325')
 }
 
 function setup() {
@@ -162,6 +168,7 @@ function addBar(dx, dy, barMode, isVIP = false) {
 
 socket.on("matchMoves", (data) => {
   if (data.type == "bar") {
+    putBarSound.play()
     addBar(data.dx, data.dy, data.mode, true);
   } else if (data.type == "move") {
     opponentLoc = {
@@ -202,6 +209,7 @@ document.getElementById("canvas-container").addEventListener("click", (e) => {
         yourLoc = { x: minPlace.x, y: minPlace.y, color };
         g.grid[y][x].hasPiece = false;
         g.grid[minPlace.y][minPlace.x].hasPiece = true;
+        moveSound.play();
         socket.emit("matchMoves", {
           type: "move",
           prevLocation: { x, y },
@@ -216,6 +224,7 @@ document.getElementById("canvas-container").addEventListener("click", (e) => {
       let dx = dotPlace.x;
       let dy = dotPlace.y;
       if (addBar(dx, dy, mode)) {
+        putBarSound.play();
         socket.emit("matchMoves", {
           type: "bar",
           mode: mode,

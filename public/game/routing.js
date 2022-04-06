@@ -18,6 +18,7 @@ let opponentLoc = {};
 let searchingAnimation;
 
 document.getElementById("findRandom").addEventListener("click", (e) => {
+  clickSound.play();
   socket.emit("toSearchingMode", socketId);
     // document.body.requestFullscreen();
   e.target.textContent = "Seacrhing...";
@@ -54,6 +55,7 @@ socket.on("matched", (data) => {
   playing = true;
   clearInterval(searchingAnimation);
   document.getElementById("findRandom").textContent = "Match Found";
+  matchFoundSound.play()
   document.getElementById("match-found-pop-up").display = "flex";
 
     setTimeout(() => {
