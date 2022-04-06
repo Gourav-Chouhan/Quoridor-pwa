@@ -114,6 +114,12 @@ io.on("connection", (socket) => {
         connected.splice(i, 1);
       }
     }
+    
+    for (let i = 0; i < queue.length; i++) {
+      if (queue[i].socketId == socket.id) {
+        queue.splice(i, 1);
+      }
+    }
 
     for (let m of matches) {
       if (m.p1.socketId == socket.id) {
