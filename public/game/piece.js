@@ -198,10 +198,10 @@ class Grid {
           if (!this.grid[y][x - 3].blocked) {
             this.legalPlaces.push(this.grid[y][x - 4]);
           } else {
-            if (!this.grid[y - 1][x - 2].blocked) {
+            if (y-1 > 0 && !this.grid[y - 1][x - 2].blocked) {
               this.legalPlaces.push(this.grid[y - 2][x - 2]);
             }
-            if (!this.grid[y + 1][x - 2].blocked) {
+            if (y+1 < !this.grid[y + 1][x - 2].blocked) {
               this.legalPlaces.push(this.grid[y + 2][x - 2]);
             }
           }
@@ -356,6 +356,7 @@ function checkWinYou() {
   }
   if (res) {
     playing = false;
+    looseSound.play();
     socket.emit("matchMoves", {
       type: "disconnect",
       msg: "You Loose!",

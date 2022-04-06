@@ -194,6 +194,7 @@ socket.on("matchMoves", (data) => {
   } else if (data.type == "matchOver") {
     // alert("You Loose");
   } else if (data.type == "disconnect") {
+    looseSound.play();
     showPopUp(data.msg);
   }
   g.getLegalPlaces();
