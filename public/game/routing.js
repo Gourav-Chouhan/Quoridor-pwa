@@ -44,6 +44,7 @@ socket.on("welcome", (data) => {
   socketId = data.socketId;
   userProfile.socketId = data.socketId;
   socket.emit("setInfo", userProfile);
+  document.getElementById("loadingScreen").style.display = "none"
   document.getElementById("findRandom").style.display = "block"
 });
 

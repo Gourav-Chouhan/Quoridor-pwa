@@ -306,3 +306,44 @@ button {
   width: 5ch;
   height: 5ch;
 }
+
+
+
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.541);
+  backdrop-filter: blur(15px);
+  width: 100vw;
+  height: 100vh;
+  padding: 1rem;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.loading-animation {
+  margin-top: 20px;
+  position: relative;
+  /* transform: translateX(-100%); */
+  border-radius: 10px;
+  height: 5px;
+  width: 100px;
+  background: black;
+  animation: animate infinite 1.5s ease-in-out alternate;
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    transform: translateX(0) scaleX(0);
+  }
+  33% {
+    transform: translateX(-50%) scaleX(1) rotate(15deg);
+  }
+  66% {
+    transform: translateX(50%) scaleX(1) rotate(-15deg);
+  }
+}
