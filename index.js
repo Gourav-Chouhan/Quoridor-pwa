@@ -195,5 +195,13 @@ async function verify(token) {
 
 
 app.get("/getOnlineInfo", (req, res) => {
-  res.send(connected);
+  
+  let temp = [];
+  for(let i=0;i<connected.length;i++){
+    temp[i] = connected[i];
+    delete temp[i].email
+  }
+  console.log('got a req')
+  temp = CircularJSON.stringify(temp);
+  res.send(temp);
 });

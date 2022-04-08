@@ -181,32 +181,34 @@ button {
   border: 2px solid #eeeed2;
 }
 
+
 .pop-up {
   position: absolute;
   display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: #769656;
+  background: rgba(245, 245, 245, 0.322);
+  backdrop-filter: blur(10px);
   border: 1px solid #eeeed2;
   box-shadow: 0 0 20px #eeeed2;
-  color: white;
-  width: 20ch;
-  height: 20ch;
+  width: 30ch;
+  height: 30ch;
   border-radius: 35px;
   padding: 10px;
   margin: 10px;
   z-index: 10;
 }
 
+.pop-up p {
+  padding: 10px;
+  color: #295200;
+}
+
 #startingTimer{
   font-size: 60px;
 }
 
-.pop-up p {
-  padding: 10px;
-  color: white;
-}
 
 #pop-up-button {
   color: white;
