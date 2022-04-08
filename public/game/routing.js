@@ -1,3 +1,5 @@
+var interval = setInterval(function() { if(document. readyState === 'complete') { clearInterval(interval); } }, 100);
+
 let socket = io();
 let userProfile = JSON.parse(localStorage.getItem("userProfile"));
 document.getElementById("usrName").textContent = userProfile.name.split(" ")[0];
