@@ -7,6 +7,7 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 app.use(express.json());
 const port = process.env.PORT;
+const CircularJSON = require('circular-json');
 
 
 let connected = [];
@@ -197,11 +198,12 @@ async function verify(token) {
 app.get("/getOnlineInfo", (req, res) => {
   
   let temp = [];
+  
   for(let i=0;i<connected.length;i++){
-    temp[i] = connected[i];
-    delete temp[i].email
+    temp[i] = JSON.parse(JSON.stringify(connected[i]));
+    temp[i].email = null;
   }
   console.log('got a req')
-  temp = CircularJSON.stringify(temp);
+  // let temp = CircularJSON.stringify(connected);
   res.send(temp);
 });
