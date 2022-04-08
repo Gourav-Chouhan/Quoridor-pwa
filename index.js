@@ -87,7 +87,7 @@ io.on("connection", (socket) => {
   
   function sendData(){
     for(let i=0;i<connected.length;i++){
-      delete connected.matched;
+      delete connected[i].matched
     }
     socket.emit('takeOnlineInfo', connected);
     // for(let p of connected){
