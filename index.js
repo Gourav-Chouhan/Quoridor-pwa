@@ -84,6 +84,14 @@ io.on("connection", (socket) => {
     }
   });
   socket.on("test", (data) => {});
+  
+  function sendData(){
+    socket.emit('takeOnlineInfo', connected);
+  }
+  
+  socket.on('getOnlineInfo', data => {
+    sendData();
+  })
 
   socket.on("toSearchingMode", (socketId) => {
     for (let i = 0; i < connected.length; i++) {
@@ -195,15 +203,15 @@ async function verify(token) {
 // second update
 
 
-app.get("/getOnlineInfo", (req, res) => {
+// app.get("/getOnlineInfo", (req, res) => {
   
-  let temp = [];
+//   let temp = [];
   
-  for(let i=0;i<connected.length;i++){
-    temp[i] = JSON.parse(JSON.stringify(connected[i]));
-    temp[i].email = null;
-  }
-  console.log('got a req')
-  // let temp = CircularJSON.stringify(connected);
-  res.send(temp);
-});
+//   for(let i=0;i<connected.length;i++){
+//     temp[i] = JSON.parse(JSON.stringify(connected[i]));
+//     temp[i].email = null;
+//   }
+//   console.log('got a req')
+//   // let temp = CircularJSON.stringify(connected);
+//   res.send(temp);
+// });

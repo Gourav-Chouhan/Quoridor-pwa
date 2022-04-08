@@ -54,21 +54,30 @@ function removeOldDataFromOnlineInfo() {
   }
 }
 
-async function getOnlineInfo() {
-  onlinePeopleParent.style.display = "flex";
-  fetch("/getOnlineInfo", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((data) => data.json())
-    .then((data) => {
-      removeOldDataFromOnlineInfo();
+socket.on('takeOnlineInfo', data => {
+  removeOldDataFromOnlineInfo();
       data.forEach((person) => {
         addPersonToList(person);
       });
-    });
+})
+
+function getOnlineInfo() {
+  onlinePeopleParent.style.display = "flex";
+  
+  socket.emit('getOnlineInfo', {});
+  // fetch("/getOnlineInfo", {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // })
+  //   .then((data) => data.json())
+  //   .then((data) => {
+  //     removeOldDataFromOnlineInfo();
+  //     data.forEach((person) => {
+  //       addPersonToList(person);
+  //     });
+  //   });
 }
 
 function closeOnlineInfo() {
