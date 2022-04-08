@@ -44,8 +44,10 @@ socket.on("welcome", (data) => {
   socketId = data.socketId;
   userProfile.socketId = data.socketId;
   socket.emit("setInfo", userProfile);
-  document.getElementById("loadingScreen").style.display = "none"
+  setTimeout(() => {
+    document.getElementById("loadingScreen").style.display = "none"
   document.getElementById("findRandom").style.display = "block"
+  }, 1000)
 });
 
 let arr = [];
