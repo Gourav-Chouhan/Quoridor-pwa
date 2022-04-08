@@ -1,4 +1,4 @@
-var interval = setInterval(function() { if(document. readyState === 'complete') { clearInterval(interval); } }, 100);
+// var interval = setInterval(function() { if(document. readyState === 'complete') { clearInterval(interval); document.getElementById("findRandom").style.display = "block"} }, 100);
 
 let socket = io();
 let userProfile = JSON.parse(localStorage.getItem("userProfile"));
@@ -44,6 +44,7 @@ socket.on("welcome", (data) => {
   socketId = data.socketId;
   userProfile.socketId = data.socketId;
   socket.emit("setInfo", userProfile);
+  document.getElementById("findRandom").style.display = "block"
 });
 
 let arr = [];
