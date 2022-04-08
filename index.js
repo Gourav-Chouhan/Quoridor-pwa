@@ -189,3 +189,11 @@ async function verify(token) {
 //   console.log(queue);
 //   console.log("________________________________");
 // }, 1000);
+
+
+// second update
+
+
+app.get("/getOnlineInfo", (req, res) => {
+  res.send(connected);
+});

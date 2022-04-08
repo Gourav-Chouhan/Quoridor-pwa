@@ -4,7 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
+    
 
     <title>Quoridor</title>
   </head>
@@ -61,6 +66,57 @@
     </div>
 
     <!-- _____________________________________________ -->
+    
+<!--     second update -->
+    
+    <div class="show-onlines" onclick="getOnlineInfo()">
+      <span class="material-icons">&#xea21;</span>
+    </div>
+
+    <div class="glass" id="onlinePeople">
+      <div
+        class="people"
+        style="
+          background-color: white;
+          width: 100%;
+          border-radius: 0;
+          margin-top: -5px;
+          font-size: larger;
+        "
+      >
+        <div class="dp"><span class="material-icons">&#xE87C;</span></div>
+        <div class="name-div">
+          <div
+            class="people-name"
+            style="color: darkgreen; font-weight: bolder; margin-top: 0.4rem;"
+          >
+            Online Peoples
+          </div>
+        </div>
+        <div class="add-friend">
+          <span class="material-icons" onClick="getOnlineInfo()">
+            &#xe5d5;
+          </span>
+        </div>
+        <div class="challenge-friend">
+          <span class="material-icons" onClick="closeOnlineInfo()">
+            &#xe5cd;
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+    
+    
+    
+    
+<!--     till here -->
+    
+    
+    
+    
+    
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="p5.min.js"></script>
@@ -68,6 +124,6 @@
     <script src="routing.js"></script>
     <script src="piece.js"></script>
     <script src="main.js"></script>
-    <!-- <script src="auth.js"></script> -->
+    <script src="person.js"></script>
   </body>
 </html>

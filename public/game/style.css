@@ -217,3 +217,90 @@ button {
   margin-right: auto;
   bottom: 1ch;
 }
+
+
+/* second update */
+
+
+.glass {
+  display: none;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.541);
+  /* background: rgba(255, 0, 0, 0.13); */
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  width: clamp(300px, 60vw, 500px);
+  max-height: 60vh;
+  height: 60vh;
+  padding: 1rem;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.glass .people {
+  /* backdrop-filter: blur(10px); */
+
+  width: 92%;
+  border: 1px white solid;
+  display: grid;
+  grid: 4ch / 4ch auto 4ch 4ch;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.37);
+  margin: 0.3rem;
+  /* drop shadow */
+  box-shadow: 0 0 14px grey;
+}
+
+.challenge-friend,
+.dp,
+.add-friend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* border: 1px yellow solid; */
+  padding: 10px;
+}
+
+.dp img {
+  height: 5ch;
+  border-radius: 50%;
+}
+
+.name-div {
+  padding: 5px;
+  margin: 4px;
+}
+
+.glass .people div .people-name {
+  font-size: 1.1rem;
+  color: #769656;
+  margin-bottom: 4px;
+  margin-top: -5px;
+}
+
+.glass .people div .people-status {
+  font-size: 0.7rem;
+  color: black;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+.show-onlines {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  left: 0.8rem;
+  top: 0.8rem;
+  width: 5ch;
+  height: 5ch;
+}
