@@ -22,7 +22,7 @@ let searchingAnimation;
 document.getElementById("findRandom").addEventListener("click", (e) => {
   clickSound.play();
   socket.emit("toSearchingMode", socketId);
-  // document.body.requestFullscreen();
+  document.body.requestFullscreen();
   e.target.textContent = "Seacrhing...";
   e.target.disabled = "true";
   searching = true;
@@ -35,6 +35,10 @@ document.getElementById("findRandom").addEventListener("click", (e) => {
     }
   }, 300);
 });
+
+function makeFullScreen(){
+  document.body.requestFullscreen();
+}
 
 let socketId;
 let you;
