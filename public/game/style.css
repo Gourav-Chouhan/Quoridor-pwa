@@ -305,9 +305,6 @@ button {
 	align-items: center;
 	background: white;
 	border-radius: 50%;
-	position: absolute;
-	left: 0.8rem;
-	top: 0.8rem;
 	width: 5ch;
 	height: 5ch;
 }
@@ -360,9 +357,6 @@ button {
 	align-items: center;
 	background: white;
 	border-radius: 50%;
-	position: absolute;
-	left: 0.8rem;
-	top: calc(1.2rem + 5ch);
 	width: 5ch;
 	height: 5ch;
 }
@@ -387,3 +381,55 @@ button {
 		background-color: rgb(0, 255, 0);
 	}
 }
+
+
+
+.options {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 5.5ch;
+	left: -5.5ch;
+	top: 0px;
+	background-color: rgba(238, 238, 238, 0.383);
+	backdrop-filter: blur(10px);
+	padding: 20px 0 20px 0;
+	border-radius: 0 20px 20px 0;
+	padding: 10px 5px;
+	transition: transform 200ms ease-in-out;
+  box-sizing: border-box;
+  
+}
+
+.options div {
+	margin: 5px;
+}
+
+.toggler {
+	position: absolute;
+	top: 20px;
+	width: 90%;
+	left: 1px;
+	transform: translateX(100%);
+	background-color: rgba(238, 238, 238, 0.383);
+	backdrop-filter: blur(10px);
+
+	border-radius: 0px 50% 50% 0px;
+}
+
+.toggler span {
+	transform: scale(170%) rotate(180deg);
+	filter: invert();
+	transition: transform 300ms ease-in-out;
+}
+
+.options-open {
+	transform: translateX(100%);
+}
+
+.options-open .toggler span {
+	transform: scale(170%) rotate(0deg);
+}
+

@@ -180,3 +180,8 @@ function closePopAllPopUps() {
 	incomingRequestParent.style.display = "none";
 	document.getElementById("showRequest").style.display = "none";
 }
+
+
+document.getElementById("optionsToggler").addEventListener("click", (e) => {
+	e.target.parentElement.parentElement.classList.toggle("options-open");
+});

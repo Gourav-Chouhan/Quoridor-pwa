@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="challenge-friend">
-          <span class="material-icons" onClick="closeIncomingRequests()">
+          <span class="material-icons" onclick="closeIncomingRequests()">
             &#xe5cd;
           </span>
         </div>
@@ -101,12 +101,22 @@
     
 <!--     second update -->
     
+    <div class="options ">
     <div class="show-onlines" onclick="getOnlineInfo()">
       <span class="material-icons">&#xea21;</span>
     </div>
 
     <div class="show-request" id="showRequest" onclick="getRequestInfo()">
       <span class="material-icons">&#xf07e;</span>
+    </div>
+
+    <div class="show-onlines" onclick="openMessagePannel()">
+      <span class="material-icons">&#xe0d8;</span>
+    </div>
+
+    <div class="show-onlines toggler" id="optionsToggler">
+      <span class="material-icons">&#xeaa7;</span>
+    </div>
     </div>
     
 
@@ -131,12 +141,12 @@
           </div>
         </div>
         <div class="add-friend">
-          <span class="material-icons" onClick="getOnlineInfo()">
+          <span class="material-icons" onclick="getOnlineInfo()">
             &#xe5d5;
           </span>
         </div>
         <div class="challenge-friend">
-          <span class="material-icons" onClick="closeOnlineInfo()">
+          <span class="material-icons" onclick="closeOnlineInfo()">
             &#xe5cd;
           </span>
         </div>
