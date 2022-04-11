@@ -33,7 +33,7 @@ document.getElementById("findRandom").addEventListener("click", (e) => {
     if (dots > 4) {
       dots = 0;
     }
-  }, 300);
+  }, 200);
 });
 
 function makeFullScreen(){
