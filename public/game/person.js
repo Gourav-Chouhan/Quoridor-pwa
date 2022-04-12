@@ -74,7 +74,8 @@ socket.on("takeOnlineInfo", (data) => {
 });
 
 function getOnlineInfo() {
-	incomingRequestParent.style.display = "none";
+	closePopAllPopUps();
+	// incomingRequestParent.style.display = "none";
 	onlinePeopleParent.style.display = "flex";
 	socket.emit("getOnlineInfo", {});
 }
@@ -86,7 +87,7 @@ function closeOnlineInfo() {
 //working over this
 
 function getRequestInfo() {
-  document.getElementById("showRequest").style.animation = "null";
+	document.getElementById("showRequest").style.animation = "null";
 	onlinePeopleParent.style.display = "none";
 	incomingRequestParent.style.display = "flex";
 	console.log(incomingRequestParent);
@@ -161,9 +162,8 @@ socket.on("receiveMatchRequest", (data) => {
 			return;
 		}
 	}
-  document.getElementById("showRequest").style.animation =
+	document.getElementById("showRequest").style.animation =
 		"gotRequestAnimation 1s infinite ease-in";
-	
 	addIncomingToList(data);
 });
 
@@ -178,10 +178,49 @@ function acceptMatchRequest(e) {
 function closePopAllPopUps() {
 	onlinePeopleParent.style.display = "none";
 	incomingRequestParent.style.display = "none";
-	document.getElementById("showRequest").style.display = "none";
+	// document.getElementById("showRequest").style.display = "none";
+	document.getElementById("messages").style.display = "none";
 }
-
 
 document.getElementById("optionsToggler").addEventListener("click", (e) => {
 	e.target.parentElement.parentElement.classList.toggle("options-open");
+});
+
+let messageBox = document.getElementsByClassName("message-box")[0];
+let messageInput = document.getElementById("messageInput");
+
+messageInput.addEventListener("keyup", function (event) {
+	if (event.code === "Enter") {
+		sendMessage();
+	}
+});
+
+function sendMessage(leftMessage = false, messageData = null) {
+	if (!leftMessage && !messageInput.value) return;
+	let elm = document.createElement("div");
+	elm.classList.add("message");
+	if (leftMessage) {
+		elm.classList.add("left");
+		console.log("done");
+		elm.textContent = messageData;
+	} else {
+		elm.classList.add("right");
+		elm.textContent = messageInput.value;
+	}
+	messageBox.appendChild(elm);
+	messageBox.scrollBy(0, messageBox.scrollHeight);
+	if (leftMessage) return;
+	socket.emit("matchMoves", {
+		type: "chatMessage",
+		to: match.p2.socketId,
+		message: messageInput.value,
+	});
+	messageInput.value = "";
+}
+
+document.getElementById("openMessagePannel").style.display = "none";
+
+document.getElementById("openMessagePannel").addEventListener("click", (e) => {
+	closePopAllPopUps();
+	document.getElementById("messages").style.display = "flex";
 });

@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
 
+/* define variables */
+
+:root {
+	--primary: #769656;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -11,6 +17,7 @@ html,
 body {
 	width: 100vw;
 	height: 100vh;
+  overflow: hidden;
 }
 
 body {
@@ -119,7 +126,7 @@ button {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-  margin: 10px;1
+	margin: 10px;
 }
 
 .player-name * {
@@ -361,7 +368,6 @@ button {
 	height: 5ch;
 }
 
-
 @keyframes gotRequestAnimation {
 	0%,
 	100% {
@@ -382,8 +388,6 @@ button {
 	}
 }
 
-
-
 .options {
 	position: absolute;
 	display: flex;
@@ -399,8 +403,7 @@ button {
 	border-radius: 0 20px 20px 0;
 	padding: 10px 5px;
 	transition: transform 200ms ease-in-out;
-  box-sizing: border-box;
-  
+	box-sizing: border-box;
 }
 
 .options div {
@@ -433,3 +436,80 @@ button {
 	transform: scale(170%) rotate(0deg);
 }
 
+#messages {
+	display: none;
+}
+
+.message-input {
+	margin-top: 18px;
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.message-input input {
+	height: 4ch;
+	font-size: 16px;
+	margin-right: 10px;
+	font-weight: lighter;
+	width: 80%;
+	border-radius: 20px;
+	padding: 8px 8px 8px 16px;
+	border: none;
+	outline: none;
+}
+
+.message-input input:focus {
+	border-bottom: 2px black solid;
+}
+
+.message-input div {
+	background: white;
+	height: 5ch;
+	width: 5ch;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	width: fill-available;
+}
+
+.message-input::after {
+	content: "";
+	position: absolute;
+	top: -12px;
+	left: -20%;
+	width: 140%;
+	height: 2px;
+	background: rgb(158, 158, 158);
+}
+
+.message-box {
+	max-height: 69%;
+	overflow-y: auto;
+	margin-top: auto;
+	width: 96%;
+	padding: 24px 6px 6px 6px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.message {
+	background: lightgreen;
+	padding: 7px 13px;
+	margin: 3px;
+}
+
+.left {
+	margin-right: auto;
+	border-radius: 8px 8px 8px 0px;
+}
+
+.right {
+	margin-left: auto;
+	border-radius: 8px 8px 0px 8px;
+}

@@ -233,6 +233,10 @@ socket.on("matchMoves", (data) => {
 	} else if (data.type == "disconnect") {
 		looseSound.play();
 		showPopUp(data.msg);
+	} else if (data.type == "chatMessage") {
+		console.log(data);
+		sendMessage(true, data.message);
+		return;
 	}
 	g.getLegalPlaces();
 	turn = true;
@@ -298,4 +302,9 @@ function showPopUp(msg) {
 function backToHome() {
 	//reload the page
 	window.location.reload();
+}
+
+
+function fullScreen(){
+document.body.requestFullscreen();
 }
