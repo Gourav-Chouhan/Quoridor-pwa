@@ -31,17 +31,16 @@ body {
 	/* color: #ff8cb8; */
 }
 
-button {
-	background: #ff8cb8;
+#findRandom, #pop-up-button{
+	background: #e08a00;
 	border: none;
 	border-radius: 5px;
-	color: black;
 	font-size: 1.5rem;
 	padding: 0.5rem 1rem;
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
 	margin: 0.5rem;
-	/* color: rgb(0, 255, 0) */
+	color: white;
 }
 
 .forSelection {
@@ -512,4 +511,20 @@ button {
 .right {
 	margin-left: auto;
 	border-radius: 8px 8px 0px 8px;
+}
+
+
+.forSelection button {
+	background-color: transparent;
+	border: none;
+	outline: none;
+	border-radius: 50%;
+	width: 7ch;
+	height: 7ch;
+	margin: 0 8px;
+	padding: 4px;
+}
+
+.forSelection button img {
+	height: 4ch;
 }
