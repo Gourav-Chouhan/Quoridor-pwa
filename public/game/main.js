@@ -234,7 +234,17 @@ socket.on("matchMoves", (data) => {
 		looseSound.play();
 		showPopUp(data.msg);
 	} else if (data.type == "chatMessage") {
-		console.log(data);
+		if (
+			document
+				.getElementById("optionsToggler")
+				.parentElement.classList.contains("options-open") == false
+		) {
+			document.getElementById("optionsToggler").classList.add("notification");
+		}
+		document
+			.getElementById("openMessagePannel")
+			.classList.add("notification-msg");
+    
 		sendMessage(true, data.message);
 		return;
 	}
