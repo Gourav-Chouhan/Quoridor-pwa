@@ -306,3 +306,5 @@ document.getElementById("openLeaderboard").addEventListener("click", () => {
 			});
 		});
 });
+
+

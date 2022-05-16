@@ -59,15 +59,8 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
       let userProfile = {};
-      const sleep = () => {
-        return new Promies(resolve, reject){
-          setTimeout(()=> {
-            resolve();
-          }, 3000)
-        }
-      }
+    
       function async onSignIn(googleUser) {
-        await sleep();
         userProfile.id_token = googleUser.getAuthResponse().id_token;
         userProfile.name = googleUser.getBasicProfile().getName();
         userProfile.email = googleUser.getBasicProfile().getEmail();
@@ -99,14 +92,7 @@
           }
         });
       }
-      
-      if ("serviceWorker" in navigator) {
-	window.addEventListener("load", function () {
-		navigator.serviceWorker
-			.register("/serviceWorker.js")
-			.then((res) => console.log("service worker registered"))
-			.catch((err) => console.log("service worker not registered", err));
-	});
+    
 }
 
     </script>
