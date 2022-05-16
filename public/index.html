@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     		<link rel="manifest" href="manifest.json" />
+		<meta name="theme-color" content="#db4938" />
 
     <meta
       name="google-signin-client_id"
@@ -52,13 +53,21 @@
         <h2>Welcome to</h2>
         <h1>Quoridor</h1>
       </div>
-<!--       <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
       let userProfile = {};
-      function onSignIn(googleUser) {
+      const sleep = () => {
+        return new Promies(resolve, reject){
+          setTimeout(()=> {
+            resolve();
+          }, 3000)
+        }
+      }
+      function async onSignIn(googleUser) {
+        await sleep();
         userProfile.id_token = googleUser.getAuthResponse().id_token;
         userProfile.name = googleUser.getBasicProfile().getName();
         userProfile.email = googleUser.getBasicProfile().getEmail();
@@ -84,8 +93,9 @@
                   "userProfile",
                   JSON.stringify(userProfile)
                 );
-                // window.location.href = "./game/index.html";
-              });
+                window.location.href = "./game/index.html";
+              
+            });
           }
         });
       }
