@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    		<link rel="manifest" href="manifest.json" />
+
     <meta
       name="google-signin-client_id"
       content="1023157306896-gf853hu70rsca3vktm2hdpjldcfucoep.apps.googleusercontent.com"
@@ -50,7 +52,7 @@
         <h2>Welcome to</h2>
         <h1>Quoridor</h1>
       </div>
-      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+<!--       <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
     </div>
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -82,11 +84,21 @@
                   "userProfile",
                   JSON.stringify(userProfile)
                 );
-                window.location.href = "./game/index.html";
+                // window.location.href = "./game/index.html";
               });
           }
         });
       }
+      
+      if ("serviceWorker" in navigator) {
+	window.addEventListener("load", function () {
+		navigator.serviceWorker
+			.register("/serviceWorker.js")
+			.then((res) => console.log("service worker registered"))
+			.catch((err) => console.log("service worker not registered", err));
+	});
+}
+
     </script>
   </body>
 </html>
