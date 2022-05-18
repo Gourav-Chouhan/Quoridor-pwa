@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    		<link rel="manifest" href="manifest.json" />
-		<meta name="theme-color" content="#db4938" />
 
     <meta
       name="google-signin-client_id"
@@ -60,7 +58,7 @@
     <script>
       let userProfile = {};
     
-      function async onSignIn(googleUser) {
+      function onSignIn(googleUser) {
         userProfile.id_token = googleUser.getAuthResponse().id_token;
         userProfile.name = googleUser.getBasicProfile().getName();
         userProfile.email = googleUser.getBasicProfile().getEmail();
@@ -93,7 +91,7 @@
         });
       }
     
-}
+
 
     </script>
   </body>
