@@ -15,6 +15,8 @@ let winSound;
 let looseSound;
 let errorSound;
 
+let barsLeft = 10;
+
 function preload() {
 	soundFormats("mp3", "ogg");
 	moveSound = loadSound(
@@ -147,6 +149,15 @@ function toMoveMode() {
 }
 
 function addBar(dx, dy, barMode, isVIP = false) {
+  if(barsLeft <= 0){
+    errorSound.play();
+				yourTurnMessage = "No bars left!!!";
+				document.getElementById("yourTurn").style.color = "red";
+				setTimeout(() => {
+					yourTurnMessage = "Your Turn";
+					document.getElementById("yourTurn").style.color = "white";
+				}, 600);
+  }
 	if (barMode == "hbar" && g.grid[dy][dx].hBlock == false) {
 		g.grid[dy][dx - 1].blocked = true;
 		g.grid[dy][dx + 1].blocked = true;
@@ -290,6 +301,7 @@ document.getElementById("canvas-container").addEventListener("click", (e) => {
 			let dy = dotPlace.y;
 			if (addBar(dx, dy, mode)) {
 				putBarSound.play();
+        barsLeft--;
 				socket.emit("matchMoves", {
 					type: "bar",
 					mode: mode,
