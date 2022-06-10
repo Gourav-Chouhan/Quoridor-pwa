@@ -15,7 +15,7 @@ let winSound;
 let looseSound;
 let errorSound;
 
-let barsLeft = 10;
+let barsLeft = 8;
 
 function preload() {
 	soundFormats("mp3", "ogg");
@@ -90,7 +90,7 @@ function draw() {
 			}
 		}
 		if (turn) {
-			document.getElementById("yourTurn").textContent = yourTurnMessage;
+			document.getElementById("yourTurn").textContent = yourTurnMessage + " ";
 			document.getElementById("yourTurn").style.animation =
 				"animateTurn 400ms ease-in";
 		} else {
@@ -157,6 +157,7 @@ function addBar(dx, dy, barMode, isVIP = false) {
 					yourTurnMessage = "Your Turn";
 					document.getElementById("yourTurn").style.color = "white";
 				}, 600);
+    return false;
   }
 	if (barMode == "hbar" && g.grid[dy][dx].hBlock == false) {
 		g.grid[dy][dx - 1].blocked = true;
