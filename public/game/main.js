@@ -90,13 +90,13 @@ function draw() {
 			}
 		}
 		if (turn) {
-			document.getElementById("yourTurn").textContent = yourTurnMessage + " ";
+			document.getElementById("yourTurn").textContent = yourTurnMessage + " Bars: " + barsLeft;
 			document.getElementById("yourTurn").style.animation =
 				"animateTurn 400ms ease-in";
 		} else {
 			document.getElementById("yourTurn").style.animation = "";
 
-			document.getElementById("yourTurn").textContent = "Opponent's Turn";
+			document.getElementById("yourTurn").textContent = "Opponent's Turn" + " Bars: " + barsLeft;
 		}
 		if (allSet && playing) {
 			drawPiece();
