@@ -4,6 +4,289 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/images/icons/favicon.ico">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="manifest" href="manifest.json" />
+<!-- ios support -->
+<link rel="apple-touch-icon" href="images/icons/icon-192x192.png" />
+<link rel="apple-touch-icon" href="images/icons/icon-256x256.png" />
+<link rel="apple-touch-icon" href="images/icons/icon-384x384.png" />
+<link rel="apple-touch-icon" href="images/icons/icon-512x512.png" />
+<meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+<meta name="theme-color" content="#db4938" />
+
+    <title>Quoridor</title>
+  </head>
+  <body onclick="fullScreen()">
+
+    <!-- working on game request -->
+
+<div class="glass" id="incomingRequests">
+      <div
+        class="people"
+        style="
+          background-color: white;
+          width: 100%;
+          border-radius: 0;
+          margin-top: -5px;
+          font-size: larger;
+          grid: 4ch / 4ch auto 4ch;
+        "
+      >
+        <div class="dp"><span class="material-icons">&#xf07e;</span></div>
+        <div class="name-div">
+          <div
+            class="people-name"
+            style="color: darkgreen; font-weight: bolder; margin-top: 0.4rem;"
+          >
+            Incoming Requests
+          </div>
+        </div>
+        <div class="challenge-friend">
+          <span class="material-icons" onClick="closeIncomingRequests()">
+            &#xe5cd;
+          </span>
+        </div>
+      </div>
+    </div>
+<!-- till here -->
+    <!-- _____________________________________________ -->
+
+    <!-- menu-page -->
+    <div style="color: white; font-size: 40px; margin-top: 60px">
+      Quoridor
+    </div>
+    <div class="pop-up" id="match-found-pop-up">
+      <h1>
+        Match Found
+          </h1>
+      <h2>
+        Match Starting in:
+      </h2>
+      <div id="startingTimer">
+        
+      </div>
+    </div>
+    
+    <div class="pop-up" id="pop-up">
+      <p class="pop-up-message" id="pop-up-message">
+        
+      </p>
+      <button id="pop-up-button" onclick="backToHome()">Home</button>
+    </div>
+
+    <div class="card" id="menu">
+      <div>
+        <h2>
+          Hello, <b><span id="usrName"></span></b>
+        </h2>
+        <h3>Welcome to</h3>
+        <h1>Quoridor</h1>
+      </div>
+      <div class="test-div"><button id="findRandom" style="display:none">Find Random</button></div>
+    </div>
+
+    <!-- _______________________________________________ -->
+
+    <div class="container" id="container">
+      <div class="forOpponent player-name" id="forOpponent"></div>
+      <div class="forCanvas" id="canvas-container"></div>
+      <div class="forYou player-name" id="forYou"></div>
+        <div class="player-name"  id="yourTurn">Waiting</div>
+
+      <div class="forSelection">
+        <button style="transform: rotate(90deg);" onclick="toHbarMode()" id="hbar">
+          <img  src="https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/pixil-frame-0.png?v=1649942639283" alt="">
+        </button>
+        <button onclick="toMoveMode()" id="move">
+          <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/SamCopeland/phpmeXx6V.png" alt="">
+        </button>
+        <button onclick="toVbarMode()" id="vbar">
+          <img  src="https://cdn.glitch.global/6eea9dd5-f5d2-4281-b867-c7cdb44ad6af/pixil-frame-0.png?v=1649942639283" alt="">
+        </button>
+      </div>
+    </div>
+
+    <!-- _____________________________________________ -->
+    
+<!--     second update -->
+    
+
+    <div class="options ">
+    <div class="show-onlines" onclick="getOnlineInfo()">
+      <span class="material-icons">&#xea21;</span>
+    </div>
+
+    <div class="show-request" id="showRequest" onclick="getRequestInfo()">
+      <span class="material-icons">&#xf07e;</span>
+    </div>
+
+    <div class="show-onlines" id="openMessagePannel">
+      <span class="material-icons">&#xe0d8;</span>
+    </div>
+
+      <div class="show-onlines" id="openLeaderboard">
+      <span class="material-icons">&#xf20c;</span>
+    </div>
+      
+    <div class="show-onlines toggler" id="optionsToggler">
+      <span class="material-icons">&#xeaa7;</span>
+    </div>
+    </div>
+
+    <div class="glass" id="onlinePeople">
+      <div
+        class="people"
+        style="
+          background-color: white;
+          width: 100%;
+          border-radius: 0;
+          margin-top: -5px;
+          font-size: larger;
+        "
+      >
+        <div class="dp"><span class="material-icons">&#xE87C;</span></div>
+        <div class="name-div">
+          <div
+            class="people-name"
+            style="color: darkgreen; font-weight: bolder; margin-top: 0.4rem;"
+          >
+            Online Peoples
+          </div>
+        </div>
+        <div class="add-friend">
+          <span class="material-icons" onclick="getOnlineInfo()">
+            &#xe5d5;
+          </span>
+        </div>
+        <div class="challenge-friend">
+          <span class="material-icons" onclick="closeOnlineInfo()">
+            &#xe5cd;
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass" id="messages">
+        <div
+        class="people"
+        style="
+          background-color: white;
+          width: 100%;
+          border-radius: 0;
+          margin-top: -5px;
+          font-size: larger;
+          grid: 4ch / 4ch auto 4ch;
+        "
+      >
+        <div class="dp"><span class="material-icons">&#xe0b7;</span></div>
+        <div class="name-div">
+          <div
+            class="people-name"
+            style="color: darkgreen; font-weight: bolder; margin-top: 0.4rem; letter-spacing: 2px;"
+          >
+            Chats
+          </div>
+        </div>
+        <div class="challenge-friend">
+          <span class="material-icons" onclick="closePopAllPopUps()">
+            &#xe5cd;
+          </span>
+        </div>
+      </div>   
+
+      <div class="message-box"> 
+
+        
+
+      </div>
+      
+      <div class="message-input"><input type="text" id="messageInput" placeholder="Write something...">
+        <div onclick="sendMessage()"><span class="material-icons">
+          &#xe163;
+        </span></div>
+      </div>
+    </div>
+
+    
+<!--     till here -->
+
+    <div class="glass" id="leaderboardDiv">
+      <div
+        class="people"
+        style="
+          background-color: white;
+          width: 100%;
+          border-radius: 0;
+          margin-top: -5px;
+          font-size: larger;
+          grid: 4ch / 4ch auto 4ch;
+        "
+      >
+        <div class="dp"><span class="material-icons">&#xf20c;</span></div>
+        <div class="name-div">
+          <div
+            class="people-name"
+            style="color: darkgreen; font-weight: bolder; margin-top: 0.4rem;"
+          >
+            Leaderboard
+          </div>
+        </div>
+        <div class="challenge-friend">
+          <span class="material-icons" onClick="closeIncomingRequests()">
+            &#xe5cd;
+          </span>
+        </div>
+      </div>   
+    </div>
+    
+<!-- loading animation     -->
+    
+    
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loading-text">
+        <span class="material-icons">&#xea1f;</span>
+        <div class="get-details">
+          
+        </div>
+        <span>Loading...</span>
+      </div>
+
+      <div class="loading-animation">
+        <div class="bar"></div>
+    </div>
+
+    
+<!-- till here -->
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="serviceWorker.js"></script>
+    <script src="p5.min.js"></script>
+    <script src="names.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/addons/p5.sound.js" integrity="sha512-U2sgwrFhl+Tgx9iGH9h5Ba2WyIjyCes+D0prtIFw3a0V+/fkaeL5Cd/VjyPHno9kUPE1rnNhBGTyvtZsfJp0xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="routing.js"></script>
+    <script src="piece.js"></script>
+    <script src="main.js"></script>
+    <script src="person.js"></script>
+
+  </body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta
       name="google-signin-client_id"
@@ -95,4 +378,4 @@
 
     </script>
   </body>
-</html>
+</html> -->

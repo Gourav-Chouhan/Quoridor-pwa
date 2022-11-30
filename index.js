@@ -13,12 +13,13 @@ let queue = [];
 let matches = [];
 
 class Person {
-	constructor(socketId) {
+	constructor(socketId, name, imageUrl) {
 		this.socketId = socketId;
-		this.authinticated = false;
-		this.email = null;
-		this.name = null;
+		this.authinticated = true;
+		// this.email = null;
+		this.name = name;
 		this.status = "idle";
+		this.imageUrl = imageUrl;
 	}
 }
 
@@ -38,6 +39,7 @@ class Match {
 }
 
 app.get("/", function (req, res) {
+	app.use("/", express.static(path.join(__dirname, "public")));
 	res.sendFile(__dirname + "/public/index.html");
 });
 
@@ -67,18 +69,21 @@ function middleware(req, res, next) {
 
 io.on("connection", (socket) => {
 	let person = new Person(socket.id);
-	connected.push(person);
+	// console.log(person);
 	socket.emit("welcome", person);
+	connected.push(person);
 
 	socket.on("setInfo", (req) => {
 		for (let i = 0; i < connected.length; i++) {
 			if (connected[i].socketId == req.socketId) {
+				console.log(req.socketId);
 				connected[i].authinticated = true;
-				connected[i].email = req.email;
+				// connected[i].email = req.email;
 				connected[i].name = req.name;
 				connected[i].imageUrl = req.imageUrl;
 				// console.log(typeof req);
-				addPeople(req);
+				console.log(req.name);
+				// addPeople(req);
 				return;
 			}
 		}
@@ -173,7 +178,6 @@ io.on("connection", (socket) => {
 				matches.splice(matches.indexOf(m), 1);
 				addScore(m.p2.email, true);
 				addScore(m.p1.email, false);
-				// console.log(m.p1);
 				io.to(m.p2.socketId).emit("matchMoves", {
 					type: "disconnect",
 					name: m.p1.name,
@@ -182,7 +186,6 @@ io.on("connection", (socket) => {
 			}
 			if (m.p2.socketId == socket.id) {
 				matches.splice(matches.indexOf(m), 1);
-				// console.log(m.p2);
 				addScore(m.p2.email, false);
 				addScore(m.p1.email, true);
 				io.to(m.p1.socketId).emit("matchMoves", {
